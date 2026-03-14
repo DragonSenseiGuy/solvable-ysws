@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solvable — Design a solution, get it 3D printed!</title>
+  <meta name="description" content="Find a real problem, design a 3D solution, and get it printed and shipped to you. A Hack Club YSWS program." />
+  <link rel="icon" href="assets/Solvable%20logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Anybody:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <a href="https://hackclub.com/">
+    <img class="orpheus-flag" src="https://assets.hackclub.com/flag-orpheus-top.svg" alt="Hack Club" />
+  </a>
+
+  <button class="stickers-btn" id="stickersBtn" onclick="openModal()">
+    Free stickers! 🎉
+  </button>
+
+  <div class="modal-backdrop" id="stickersModal" onclick="closeModalBackdrop(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">Close</button>
+      <h2 style="font-family: 'Anybody', sans-serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 8px; color: var(--yellow);">
+        Free swag with your submission
+      </h2>
+      <p style="color: var(--text-muted); font-size: 1rem;">
+        Ship a project, get exclusive Solvable goodies!
+      </p>
+
+      <div class="sticker-grid">
+        <div class="sticker-card">
+          <div class="sticker-preview">
+            <img src="assets/Sticker%201.png" alt="Solvable Sticker 1" class="spin-normal" />
+          </div>
+          <h3 style="font-family: 'Anybody', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--purple-lighter);">
+            Lightbulb Sticker
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">yay stickers!!!</p>
+        </div>
+
+        <div class="sticker-card">
+          <div class="sticker-preview">
+            <img src="assets/Sticker%202.png" alt="Solvable Sticker 2" class="spin-reverse" />
+          </div>
+          <h3 style="font-family: 'Anybody', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--purple-lighter);">
+            3D Printer Sticker
+          </h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">a must-have for makers</p>
+        </div>
+      </div>
+
+      <div class="sticker-card" style="margin-top: 20px; text-align: center; padding: 16px;">
+        <p style="font-weight: 600;">Ship your first project and we'll mail these to you!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="presents-row">
+        <a href="https://hackclub.com" style="display: flex; align-items: center; gap: 8px;">
+          <img src="https://assets.hackclub.com/icon-rounded.svg" alt="Hack Club" />
+          <p><span class="hc-red">Hack Club</span> presents...</p>
+        </a>
+      </div>
+
+      <div class="desktop-only">
+        <div class="canvas-container" id="canvasContainer">
+          <canvas id="canvas" width="200" height="200"></canvas>
+        </div>
+        <p class="interact-hint">interact with me!</p>
+      </div>
+
+      <img src="assets/Solvable%20logo.png" alt="Solvable logo" class="mobile-logo" />
+      <div class="cta-area">
+        <p class="tagline">Design a solution to a real problem — get it 3D printed!</p>
+        <p class="subtitle">A Hack Club YSWS · Must be 13-18</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What is Solvable?</h2>
+    <div class="section-content">
+      <p>
+        <strong>Solvable YSWS</strong> is a You Ship, We Ship program. Your task is to find a
+        <strong>problem or inconvenience</strong> in your life and 3D design a solution. Whether
+        it's a small tool or a simple design, it's a solution built by <strong>you</strong>!
+      </p>
+      <p>
+        Design it, submit it, and we'll <strong>3D print</strong> it and ship it straight to your door.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>How It Works</h2>
+    <div class="section-content">
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Find a Problem</h3>
+          <p>Look for an inconvenience in your life that needs a fix.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Design in CAD</h3>
+          <p>Model your solution in your favorite 3D software.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Submit Form</h3>
+          <p>Tell us about your project and request hardware.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Get It Shipped</h3>
+          <p>Receive your part printed and ready to use!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Requirements</h2>
+    <div class="section-content">
+      <div class="rules-grid">
+        <div class="rules-box">
+          <h3>Eligibility</h3>
+          <ul>
+            <li>Be under 18 years old</li>
+            <li>Be a member of the <a href="https://hackclub.com/slack/">Hack Club Slack</a></li>
+            <li>Submit your own original work</li>
+          </ul>
+        </div>
+        <div class="rules-box">
+          <h3>Project Requirements</h3>
+          <ul>
+            <li>Solve a real, specific problem</li>
+            <li>Be something you can physically build</li>
+            <li>Be shippable within the timeframe</li>
+            <li>Include documentation of your process</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>Who can participate?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>To participate, you must be a member of the <a href="https://hackclub.com/slack/">Hack Club community</a> and be 18 years old or younger (≤18).</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>Do I need to use hardware at all?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nope! It can just be 3D printed, as long as it solves your problem.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>What is the maximum size of a project?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>While there are no restrictions on size, your project should be able to fit on most 3D printers (256×256mm).</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>Can I work with a partner?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, as long as only one person submits the project.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>Is this a competition?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>For now this isn't a competition, but some outstanding projects might receive a prize.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <button class="faq-question">
+          <span>Is this free?</span>
+          <span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! This program is entirely funded by <a href="https://hackclub.com">Hack Club</a>, a US-based 501(c)(3) charity helping teens learn how to design and code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="final-cta">
+    <h2>Ready to Solve?</h2>
+  </div>
+
+  <footer>
+    A <a href="https://hackclub.com">Hack Club</a> program. Made by teens, for teens!
+  </footer>
+
+  <script>
+    function openModal() {
+      document.getElementById('stickersModal').classList.add('open');
+      document.getElementById('stickersBtn').style.display = 'none';
+    }
+    function closeModal() {
+      document.getElementById('stickersModal').classList.remove('open');
+      document.getElementById('stickersBtn').style.display = '';
+    }
+    function closeModalBackdrop(e) {
+      if (e.target === e.currentTarget) closeModal();
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function toggleFaq(item) {
+      item.classList.toggle('open');
+    }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { ThreeMFLoader } from 'three/addons/loaders/3MFLoader.js';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const canvas = document.getElementById('canvas');
+    if (!canvas || window.innerWidth < 640) {
+    } else {
+      const scene = new THREE.Scene();
+      const deg = Math.PI / 180;
+
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      renderer.setClearColor(0xffffff, 0);
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      const camera = new THREE.PerspectiveCamera(40, 2, 1, 1000);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0, 0);
+      controls.rotateSpeed = 0.6;
+      controls.enablePan = false;
+      controls.dampingFactor = 0.1;
+      controls.enableDamping = true;
+      controls.autoRotate = false;
+      controls.autoRotateSpeed = 2;
+      controls.update();
+
+      const hemisphere = new THREE.HemisphereLight(0xffffff, 0xffffff, 4);
+      scene.add(hemisphere);
+
+      const dir1 = new THREE.DirectionalLight(0xffffff, 1);
+      dir1.castShadow = true;
+      dir1.shadow.mapSize.set(2048, 2048);
+      scene.add(dir1);
+
+      const dir2 = new THREE.DirectionalLight(0xffffff, 1);
+      dir2.castShadow = true;
+      dir2.shadow.mapSize.set(2048, 2048);
+      scene.add(dir2);
+
+      const ambient = new THREE.AmbientLight(0xbd75f5, 0.3);
+      scene.add(ambient);
+
+      function resizeCanvas() {
+        const w = canvas.clientWidth;
+        const h = canvas.clientHeight;
+        if (canvas.width !== w || canvas.height !== h) {
+          renderer.setSize(w, h, false);
+          renderer.setPixelRatio(window.devicePixelRatio);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
+      }
+
+      function parseObject(object) {
+        object.rotation.set(90, 0, 0);
+
+        const aabb = new THREE.Box3().setFromObject(object);
+        const center = aabb.getCenter(new THREE.Vector3());
+        object.position.x += object.position.x - center.x;
+        object.position.y += object.position.y - center.y;
+        object.position.z += object.position.z - center.z;
+        controls.reset();
+
+        const box = new THREE.Box3().setFromObject(object);
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const largest = Math.max(size.x, size.y, size.z);
+
+        camera.position.set(0, 0, largest * 4);
+        camera.lookAt(0, 0, 0);
+        controls.target.set(0, 0, 0);
+        controls.update();
+        dir1.position.set(largest * 2, largest * 2, largest * 2);
+        dir2.position.set(-largest * 2, largest * 2, -largest * 2);
+        camera.near = largest * 0.001;
+        camera.far = largest * 10;
+        camera.updateProjectionMatrix();
+
+        object.traverse((child) => {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.isMesh && child.geometry) {
+            if (!child.material || (child.material.isMeshBasicMaterial && child.material.color.getHex() === 0xffffff)) {
+              child.material = new THREE.MeshStandardMaterial({
+                color: 0x1e1e2e,
+                roughness: 0.4,
+                metalness: 0.2
+              });
+            }
+          }
+        });
+
+        scene.add(object);
+      }
+
+      const loader = new ThreeMFLoader();
+      loader.load(
+        'assets/Solvable%203D.3mf',
+        parseObject,
+        (xhr) => console.log((xhr.loaded / xhr.total) * 100 + '% loaded'),
+        (err) => console.error('Error loading 3MF:', err)
+      );
+
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        renderer.render(scene, camera);
+        resizeCanvas();
+      }
+      animate();
+    }
+  </script>
+</body>
+</html>
